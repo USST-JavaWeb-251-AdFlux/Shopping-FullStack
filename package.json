@@ -10,8 +10,20 @@
     "postinstall": "nuxt prepare"
   },
   "dependencies": {
+    "@element-plus/nuxt": "^1.1.4",
+    "@pinia/nuxt": "^0.11.3",
+    "bcrypt": "^6.0.0",
+    "element-plus": "^2.12.0",
+    "jsonwebtoken": "^9.0.3",
+    "mysql2": "^3.16.0",
     "nuxt": "^4.2.2",
+    "pinia": "^3.0.4",
     "vue": "^3.5.25",
     "vue-router": "^4.6.4"
+  },
+  "devDependencies": {
+    "@types/bcrypt": "^6.0.0",
+    "@types/jsonwebtoken": "^9.0.10",
+    "dotenv": "^17.2.3"
   }
 }
