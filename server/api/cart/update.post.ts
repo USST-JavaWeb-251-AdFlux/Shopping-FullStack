@@ -22,10 +22,15 @@ export default defineEventHandler(async (event) => {
     throw createError({ statusCode: 400, statusMessage: 'Product ID and quantity required' });
   }
 
+  const parsedQuantity = Number(quantity);
+  if (!Number.isInteger(parsedQuantity) || parsedQuantity <= 0) {
+    throw createError({ statusCode: 400, statusMessage: 'Quantity must be a positive integer' });
+  }
+
   try {
     await pool.execute(
       'UPDATE cart_items SET quantity = ? WHERE user_id = ? AND product_id = ?',
-      [quantity, userId, productId]
+      [parsedQuantity, userId, productId]
     );
     return { message: 'Cart updated' };
   } catch (error) {
