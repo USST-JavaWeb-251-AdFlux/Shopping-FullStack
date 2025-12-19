@@ -16,8 +16,17 @@ export default defineEventHandler(async (event) => {
   }
 
   const body = await readBody(event);
-  const { productId } = body;
+  const { productId } = body || {};
 
+  if (
+    productId === undefined ||
+    productId === null ||
+    typeof productId !== 'number' ||
+    !Number.isInteger(productId) ||
+    productId <= 0
+  ) {
+    throw createError({ statusCode: 400, statusMessage: 'Invalid productId' });
+  }
   try {
     await pool.execute(
       'DELETE FROM cart_items WHERE user_id = ? AND product_id = ?',
