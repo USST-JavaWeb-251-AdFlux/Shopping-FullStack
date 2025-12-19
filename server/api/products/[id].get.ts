@@ -15,10 +15,16 @@ export default defineEventHandler(async (event) => {
     }
 
     return products[0];
-  } catch (error) {
+  } catch (error: any) {
+    // Preserve existing HTTP errors (e.g., those created with createError)
+    if (error && typeof error === 'object' && 'statusCode' in error) {
+      throw error;
+    }
+
     throw createError({
       statusCode: 500,
       statusMessage: 'Error fetching product',
+      cause: error,
     });
   }
 });
