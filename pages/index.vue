@@ -77,4 +77,3 @@ watch(() => route.query, () => {
   refresh();
 });
 </script>
-

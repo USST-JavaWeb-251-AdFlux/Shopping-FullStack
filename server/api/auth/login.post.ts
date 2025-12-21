@@ -1,6 +1,6 @@
 import bcrypt from 'bcrypt';
-import jwt from 'jsonwebtoken';
 import pool from '~/server/utils/db';
+import { signUserToken } from '~/server/utils/jwt';
 
 export default defineEventHandler(async (event) => {
   const body = await readBody(event);
@@ -33,14 +33,12 @@ export default defineEventHandler(async (event) => {
     });
   }
 
-  const token = jwt.sign({ id: user.id, username: user.username }, process.env.JWT_SECRET || 'supersecretkey', {
-    expiresIn: '24h',
-  });
+  const token = signUserToken(user);
 
   setCookie(event, 'auth_token', token, {
     httpOnly: true,
     secure: process.env.NODE_ENV === 'production',
-    maxAge: 60 * 60 * 24, // 1 day
+    maxAge: 60 * 60 * 24,
     path: '/',
   });
 

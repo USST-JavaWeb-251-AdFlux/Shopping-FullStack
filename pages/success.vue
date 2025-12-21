@@ -5,4 +5,3 @@
     <NuxtLink to="/" class="btn" style="margin-top: 20px;">继续购物</NuxtLink>
   </div>
 </template>
-

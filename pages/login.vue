@@ -38,5 +38,3 @@ const handleLogin = async () => {
   }
 };
 </script>
-
-

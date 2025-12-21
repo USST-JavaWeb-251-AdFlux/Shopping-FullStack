@@ -112,9 +112,8 @@ a {
 
 .content {
   flex-grow: 1;
-  min-width: 0; /* Prevent flex item from overflowing */
+  min-width: 0;
 }
-
 
 .product-grid {
   display: grid;
@@ -140,7 +139,6 @@ a {
   object-fit: cover;
   margin-bottom: 10px;
 }
-
 
 .product-title {
   font-size: 14px;
@@ -194,7 +192,6 @@ a {
   align-items: center;
 }
 
-/* Product Detail */
 .product-detail {
   background: #fff;
   padding: 30px;
@@ -238,7 +235,6 @@ a {
   gap: 15px;
 }
 
-/* Cart */
 .cart-table {
   width: 100%;
   border-collapse: collapse;
@@ -264,7 +260,6 @@ a {
   color: #e4393c;
 }
 
-/* Auth Forms */
 .auth-form {
   max-width: 400px;
   margin: 50px auto;

@@ -1,29 +1,18 @@
-import jwt from 'jsonwebtoken';
 import pool from '~/server/utils/db';
+import { getUserFromEvent } from '~/server/utils/auth';
 
 export default defineEventHandler(async (event) => {
-  const token = getCookie(event, 'auth_token');
-  if (!token) {
-    throw createError({ statusCode: 401, statusMessage: 'Unauthorized' });
-  }
-
-  let userId;
-  try {
-    const decoded = jwt.verify(token, process.env.JWT_SECRET || 'supersecretkey') as any;
-    userId = decoded.id;
-  } catch (err) {
-    throw createError({ statusCode: 401, statusMessage: 'Invalid token' });
-  }
+  const user = getUserFromEvent(event);
+  const userId = user.id;
 
   const body = await readBody(event);
-  let items = body.items; // Array of { productId, quantity }
+  let items = body.items;
 
   const connection = await pool.getConnection();
   await connection.beginTransaction();
 
   try {
     if (!items || items.length === 0) {
-      // Checkout from cart
       const [cartRows] = await connection.execute(
         'SELECT product_id as productId, quantity FROM cart_items WHERE user_id = ?',
         [userId]
@@ -35,7 +24,6 @@ export default defineEventHandler(async (event) => {
       }
     }
 
-    // Process items
     for (const item of items) {
       const [productRows] = await connection.execute(
         'SELECT quantity FROM products WHERE id = ? FOR UPDATE',
@@ -53,7 +41,6 @@ export default defineEventHandler(async (event) => {
       );
     }
 
-    // If it was a cart checkout, clear the cart
     if (!body.items) {
       await connection.execute('DELETE FROM cart_items WHERE user_id = ?', [userId]);
     }

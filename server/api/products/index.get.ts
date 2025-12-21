@@ -3,7 +3,7 @@ import pool from '~/server/utils/db';
 export default defineEventHandler(async (event) => {
   const query = getQuery(event);
   const category = query.category as string;
-  const sort = query.sort as string; // 'price_asc' or 'price_desc'
+  const sort = query.sort as string;
   const search = query.search as string;
 
   let sql = 'SELECT * FROM products';

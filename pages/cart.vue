@@ -34,7 +34,6 @@
         <el-table-column label="操作" width="80">
           <template #default="scope">
             <el-button type="danger" size="small" @click="confirmRemove(scope.row)">移除</el-button>
-            <!-- <el-button type="danger" size="small" circle icon="Delete" @click="confirmRemove(scope.row)" /> -->
           </template>
         </el-table-column>
       </el-table>
@@ -42,7 +41,7 @@
 
       <div class="cart-summary">
         <div class="total-price">总价: ¥{{ cartStore.totalPrice.toFixed(2) }}</div>
-        <el-button type="primary" size="large" style="margin-top: 10px;" @click="cartStore.checkout">结账</el-button>
+        <el-button type="primary" size="large" style="margin-top: 10px;" @click="handleCheckout">结账</el-button>
       </div>
     </div>
     <div v-else>
@@ -63,22 +62,22 @@ definePageMeta({
   middleware: ['auth']
 });
 
+const handleCheckout = async () => {
+  try {
+    await cartStore.checkout();
+  } catch (e) {
+    ElNotification({
+      title: '错误',
+      message: '结账失败: ' + (e.data?.statusMessage || e.message),
+      type: 'error',
+    });
+  }
+};
+
 const handleQuantityChange = async (item, newVal) => {
   if (newVal === 0) {
     await confirmRemove(item);
   } else {
-    // Update quantity in backend
-    // Since we don't have a direct update quantity API, we can use add/remove logic or create a new one.
-    // For simplicity, let's assume we add the difference.
-    // Actually, the current add API adds to existing quantity.
-    // To set exact quantity, we might need a new API or logic.
-    // Let's use a workaround: calculate difference and add/remove.
-    // BUT, the store state is already updated by v-model locally.
-    // We should probably implement an update endpoint or just re-add the difference.
-    
-    // Better approach: Implement updateCartItem in store/API.
-    // For now, let's assume we just call addToCart with difference? No, that's risky.
-    // Let's add an update action to the store.
     await cartStore.updateQuantity(item.product_id, newVal);
   }
 };
@@ -98,7 +97,6 @@ const confirmRemove = (item) => {
       ElMessage.success('已移除');
     })
     .catch(() => {
-      // If cancelled and quantity was 0, revert to 1 (or previous value if we tracked it)
       if (item.quantity === 0) {
         item.quantity = 1; // Simple revert
         cartStore.updateQuantity(item.product_id, 1);
@@ -106,4 +104,3 @@ const confirmRemove = (item) => {
     });
 };
 </script>
-

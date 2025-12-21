@@ -23,7 +23,6 @@ async function setup() {
     
     await connection.changeUser({ database: dbName });
 
-    // Users table
     await connection.query(`
       CREATE TABLE IF NOT EXISTS users (
         id INT AUTO_INCREMENT PRIMARY KEY,
@@ -34,7 +33,6 @@ async function setup() {
     `);
     console.log('Users table ready.');
 
-    // Products table
     await connection.query(`
       CREATE TABLE IF NOT EXISTS products (
         id INT AUTO_INCREMENT PRIMARY KEY,
@@ -49,7 +47,6 @@ async function setup() {
     `);
     console.log('Products table ready.');
 
-    // Cart Items table
     await connection.query(`
       CREATE TABLE IF NOT EXISTS cart_items (
         id INT AUTO_INCREMENT PRIMARY KEY,

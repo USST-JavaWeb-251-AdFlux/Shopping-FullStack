@@ -1,19 +1,9 @@
-import jwt from 'jsonwebtoken';
 import pool from '~/server/utils/db';
+import { getUserFromEvent } from '~/server/utils/auth';
 
 export default defineEventHandler(async (event) => {
-  const token = getCookie(event, 'auth_token');
-  if (!token) {
-    throw createError({ statusCode: 401, statusMessage: 'Unauthorized' });
-  }
-
-  let userId;
-  try {
-    const decoded = jwt.verify(token, process.env.JWT_SECRET || 'supersecretkey') as any;
-    userId = decoded.id;
-  } catch (err) {
-    throw createError({ statusCode: 401, statusMessage: 'Invalid token' });
-  }
+  const user = getUserFromEvent(event);
+  const userId = user.id;
 
   const body = await readBody(event);
   const { productId, quantity } = body;

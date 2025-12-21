@@ -62,13 +62,12 @@ export const useCartStore = defineStore('cart', {
       }
     },
     async checkout() {
-
       try {
         await $fetch('/api/checkout', { method: 'POST', body: {} });
         this.items = [];
         navigateTo('/success');
       } catch (e) {
-        alert('Checkout failed: ' + (e as any).statusMessage);
+        throw e;
       }
     }
   },
