@@ -1,0 +1,167 @@
+import mysql from 'mysql2/promise';
+import dotenv from 'dotenv';
+import path from 'path';
+import { fileURLToPath } from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+dotenv.config({ path: path.resolve(__dirname, '../.env') });
+
+async function seed() {
+  const connection = await mysql.createConnection({
+    host: process.env.DB_HOST || 'localhost',
+    user: process.env.DB_USER || 'root',
+    password: process.env.DB_PASSWORD || 'password',
+    database: process.env.DB_NAME || 'shopping_db',
+  });
+
+  try {
+    const products = [
+      {
+        "name": "Smartphone X",
+        "price": 699.00,
+        "description": "Latest model with high-res camera.",
+        "category": "Electronics",
+        "mainImage": "https://placehold.co/300x300?text=Phone",
+        "quantity": 50
+      },
+      {
+        "name": "Laptop Pro",
+        "price": 1299.00,
+        "description": "Powerful laptop for professionals.",
+        "category": "Electronics",
+        "mainImage": "https://placehold.co/300x300?text=Laptop",
+        "quantity": 30
+      },
+      {
+        "name": "Wireless Headphones",
+        "price": 199.00,
+        "description": "Noise cancelling headphones.",
+        "category": "Electronics",
+        "mainImage": "https://placehold.co/300x300?text=Headphones",
+        "quantity": 100
+      },
+      {
+        "name": "Smart Watch",
+        "price": 249.00,
+        "description": "Track your fitness and notifications.",
+        "category": "Electronics",
+        "mainImage": "https://placehold.co/300x300?text=Watch",
+        "quantity": 75
+      },
+      {
+        "name": "4K Monitor",
+        "price": 399.00,
+        "description": "Crystal clear display.",
+        "category": "Electronics",
+        "mainImage": "https://placehold.co/300x300?text=Monitor",
+        "quantity": 20
+      },
+      {
+        "name": "Cotton T-Shirt",
+        "price": 19.99,
+        "description": "Comfortable 100% cotton t-shirt.",
+        "category": "Clothing",
+        "mainImage": "https://placehold.co/300x300?text=T-Shirt",
+        "quantity": 200
+      },
+      {
+        "name": "Jeans",
+        "price": 49.99,
+        "description": "Classic blue jeans.",
+        "category": "Clothing",
+        "mainImage": "https://placehold.co/300x300?text=Jeans",
+        "quantity": 150
+      },
+      {
+        "name": "Sneakers",
+        "price": 79.99,
+        "description": "Stylish and comfortable sneakers.",
+        "category": "Clothing",
+        "mainImage": "https://placehold.co/300x300?text=Sneakers",
+        "quantity": 80
+      },
+      {
+        "name": "Winter Jacket",
+        "price": 129.99,
+        "description": "Warm jacket for cold weather.",
+        "category": "Clothing",
+        "mainImage": "https://placehold.co/300x300?text=Jacket",
+        "quantity": 40
+      },
+      {
+        "name": "Cap",
+        "price": 14.99,
+        "description": "Stylish baseball cap.",
+        "category": "Clothing",
+        "mainImage": "https://placehold.co/300x300?text=Cap",
+        "quantity": 120
+      },
+      {
+        "name": "Sofa",
+        "price": 499.00,
+        "description": "Comfortable 3-seater sofa.",
+        "category": "Furniture",
+        "mainImage": "https://placehold.co/300x300?text=Sofa",
+        "quantity": 10
+      },
+      {
+        "name": "Coffee Table",
+        "price": 89.00,
+        "description": "Modern wooden coffee table.",
+        "category": "Furniture",
+        "mainImage": "https://placehold.co/300x300?text=Table",
+        "quantity": 25
+      },
+      {
+        "name": "Lamp",
+        "price": 39.00,
+        "description": "Desk lamp with adjustable brightness.",
+        "category": "Furniture",
+        "mainImage": "https://placehold.co/300x300?text=Lamp",
+        "quantity": 60
+      },
+      {
+        "name": "Rug",
+        "price": 59.00,
+        "description": "Soft area rug.",
+        "category": "Furniture",
+        "mainImage": "https://placehold.co/300x300?text=Rug",
+        "quantity": 35
+      },
+      {
+        "name": "Bookshelf",
+        "price": 79.00,
+        "description": "5-tier bookshelf.",
+        "category": "Furniture",
+        "mainImage": "https://placehold.co/300x300?text=Bookshelf",
+        "quantity": 15
+      }
+    ];
+
+    console.log('Clearing existing data...');
+    await connection.execute('DELETE FROM cart_items');
+    await connection.execute('DELETE FROM products');
+    await connection.execute('ALTER TABLE products AUTO_INCREMENT = 1');
+
+    console.log(`Seeding ${products.length} products...`);
+
+    for (const product of products) {
+
+      await connection.execute(
+        'INSERT INTO products (name, price, description, category, mainImage, quantity) VALUES (?, ?, ?, ?, ?, ?)',
+        [product.name, product.price, product.description, product.category, product.mainImage, product.quantity]
+      );
+    }
+
+    console.log('Seeding complete.');
+
+  } catch (err) {
+    console.error('Error seeding database:', err);
+  } finally {
+    await connection.end();
+  }
+}
+
+seed();
