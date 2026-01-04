@@ -32,6 +32,18 @@ const quantity = ref(1);
 
 const { data: product } = await useFetch(`/api/products/${route.params.id}`);
 
+const categoryMap = {
+  'Electronics': '电子产品',
+  'Clothing': '服装',
+  'Furniture': '家具'
+};
+
+useHead({
+  meta: [
+    { name: 'adflux-page-category', content: computed(() => categoryMap[product.value?.category] || '') }
+  ]
+});
+
 const addToCart = async () => {
   await cartStore.addToCart(product.value, quantity.value);
   ElMessage.success('已加入购物车');
