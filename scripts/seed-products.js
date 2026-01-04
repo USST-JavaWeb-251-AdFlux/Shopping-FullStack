@@ -23,7 +23,7 @@ async function seed() {
         "price": 699.00,
         "description": "Latest model with high-res camera.",
         "category": "Electronics",
-        "mainImage": "https://placehold.co/300x300?text=Phone",
+        "mainImage": "/Electronics/Phone.jpg",
         "quantity": 50
       },
       {
@@ -31,7 +31,7 @@ async function seed() {
         "price": 1299.00,
         "description": "Powerful laptop for professionals.",
         "category": "Electronics",
-        "mainImage": "https://placehold.co/300x300?text=Laptop",
+        "mainImage": "/Electronics/Laptop.jpg",
         "quantity": 30
       },
       {
@@ -39,7 +39,7 @@ async function seed() {
         "price": 199.00,
         "description": "Noise cancelling headphones.",
         "category": "Electronics",
-        "mainImage": "https://placehold.co/300x300?text=Headphones",
+        "mainImage": "/Electronics/Headphones.jpg",
         "quantity": 100
       },
       {
@@ -47,7 +47,7 @@ async function seed() {
         "price": 249.00,
         "description": "Track your fitness and notifications.",
         "category": "Electronics",
-        "mainImage": "https://placehold.co/300x300?text=Watch",
+        "mainImage": "/Electronics/Watch.jpg",
         "quantity": 75
       },
       {
@@ -55,7 +55,7 @@ async function seed() {
         "price": 399.00,
         "description": "Crystal clear display.",
         "category": "Electronics",
-        "mainImage": "https://placehold.co/300x300?text=Monitor",
+        "mainImage": "/Electronics/Monitor.jpg",
         "quantity": 20
       },
       {
@@ -63,7 +63,7 @@ async function seed() {
         "price": 19.99,
         "description": "Comfortable 100% cotton t-shirt.",
         "category": "Clothing",
-        "mainImage": "https://placehold.co/300x300?text=T-Shirt",
+        "mainImage": "/Clothing/T-Shirt.jpg",
         "quantity": 200
       },
       {
@@ -71,7 +71,7 @@ async function seed() {
         "price": 49.99,
         "description": "Classic blue jeans.",
         "category": "Clothing",
-        "mainImage": "https://placehold.co/300x300?text=Jeans",
+        "mainImage": "/Clothing/Jeans.jpg",
         "quantity": 150
       },
       {
@@ -79,7 +79,7 @@ async function seed() {
         "price": 79.99,
         "description": "Stylish and comfortable sneakers.",
         "category": "Clothing",
-        "mainImage": "https://placehold.co/300x300?text=Sneakers",
+        "mainImage": "/Clothing/Sneakers.jpg",
         "quantity": 80
       },
       {
@@ -87,7 +87,7 @@ async function seed() {
         "price": 129.99,
         "description": "Warm jacket for cold weather.",
         "category": "Clothing",
-        "mainImage": "https://placehold.co/300x300?text=Jacket",
+        "mainImage": "/Clothing/Jacket.jpg",
         "quantity": 40
       },
       {
@@ -95,7 +95,7 @@ async function seed() {
         "price": 14.99,
         "description": "Stylish baseball cap.",
         "category": "Clothing",
-        "mainImage": "https://placehold.co/300x300?text=Cap",
+        "mainImage": "/Clothing/Cap.jpg",
         "quantity": 120
       },
       {
@@ -103,7 +103,7 @@ async function seed() {
         "price": 499.00,
         "description": "Comfortable 3-seater sofa.",
         "category": "Furniture",
-        "mainImage": "https://placehold.co/300x300?text=Sofa",
+        "mainImage": "/Furniture/Sofa.jpg",
         "quantity": 10
       },
       {
@@ -111,7 +111,7 @@ async function seed() {
         "price": 89.00,
         "description": "Modern wooden coffee table.",
         "category": "Furniture",
-        "mainImage": "https://placehold.co/300x300?text=Table",
+        "mainImage": "/Furniture/Table.jpg",
         "quantity": 25
       },
       {
@@ -119,7 +119,7 @@ async function seed() {
         "price": 39.00,
         "description": "Desk lamp with adjustable brightness.",
         "category": "Furniture",
-        "mainImage": "https://placehold.co/300x300?text=Lamp",
+        "mainImage": "/Furniture/Lamp.jpg",
         "quantity": 60
       },
       {
@@ -127,7 +127,7 @@ async function seed() {
         "price": 59.00,
         "description": "Soft area rug.",
         "category": "Furniture",
-        "mainImage": "https://placehold.co/300x300?text=Rug",
+        "mainImage": "/Furniture/Rug.jpg",
         "quantity": 35
       },
       {
@@ -135,7 +135,7 @@ async function seed() {
         "price": 79.00,
         "description": "5-tier bookshelf.",
         "category": "Furniture",
-        "mainImage": "https://placehold.co/300x300?text=Bookshelf",
+        "mainImage": "/Furniture/Bookshelf.jpg",
         "quantity": 15
       }
     ];
