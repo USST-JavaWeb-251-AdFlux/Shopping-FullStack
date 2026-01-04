@@ -46,7 +46,7 @@
           </ul>
         </div>
         <div class="sidebar-ad">
-          广告位
+          <adflux-slot layout="sidebar"></adflux-slot>
         </div>
       </aside>
 
@@ -56,7 +56,7 @@
 
       <aside class="sidebar">
         <div class="sidebar-ad">
-          广告位
+          <adflux-slot layout="sidebar"></adflux-slot>
         </div>
       </aside>
     </div>
